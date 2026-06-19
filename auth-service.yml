@@ -3,17 +3,24 @@ server:
 
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=ecommerce_auth;encrypt=true;trustServerCertificate=true
-    username: ecommerce-spring-user
-    password: Ecommerce@Big4#Pass2026
+    url: "${DB_URL:jdbc:sqlserver://localhost:1433;instanceName=SQLEXPRESS;databaseName=ecommerce_auth_db;encrypt=true;trustServerCertificate=true}"
+    username: "${DB_USER:ecommerce-spring-user}"
+    # Do NOT hardcode the password in the repo. Use environment variable DB_PASSWORD or a secrets manager.
+    password: "${DB_PASSWORD:}"
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 1800000
+      connection-timeout: 30000
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
         dialect: org.hibernate.dialect.SQLServerDialect
 
   application:
