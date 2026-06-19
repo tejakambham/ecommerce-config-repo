@@ -3,7 +3,7 @@ server:
 
 spring:
   datasource:
-    url: jdbc:sqlserver://localhost:1433;instanceName=SQLEXPRESS;databaseName=ecommerce_auth;encrypt=true;trustServerCertificate=true
+    url: jdbc:sqlserver://localhost:1433;databaseName=ecommerce_auth;encrypt=true;trustServerCertificate=true
     username: ecommerce-spring-user
     password: Ecommerce@Big4#Pass2026
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
