@@ -4,7 +4,10 @@ server:
 spring:
 
   datasource:
-    url: jdbc:sqlserver://localhost;databaseName=ecommerce_auth_db;integratedSecurity=true;encrypt=false;trustServerCertificate=true
+    # Use explicit TCP port (default SQL Server port 1433). Replace username/password with real credentials
+    url: jdbc:sqlserver://localhost:1433;databaseName=ecommerce_auth_db;encrypt=false;trustServerCertificate=true
+    username: db_user
+    password: db_password
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:
@@ -16,6 +19,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+        # Explicit dialect for Microsoft SQL Server to avoid "Unable to determine Dialect without JDBC metadata"
+        dialect: org.hibernate.dialect.SQLServerDialect
+      # Also provide the persistence URL as a fallback for metadata-driven lookup
+      jakarta.persistence.jdbc.url: jdbc:sqlserver://localhost:1433;databaseName=ecommerce_auth_db;encrypt=false;trustServerCertificate=true
 
   application:
     name: auth-service
