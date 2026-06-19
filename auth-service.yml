@@ -4,7 +4,7 @@ server:
 spring:
 
   datasource:
-    url: jdbc:sqlserver://localhost:1433;databaseName=ecommerce_auth_db;integratedSecurity=true;encrypt=true;trustServerCertificate=true;
+    url: jdbc:sqlserver://localhost;databaseName=ecommerce_auth_db;integratedSecurity=true;encrypt=false;trustServerCertificate=true
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
 
   jpa:
