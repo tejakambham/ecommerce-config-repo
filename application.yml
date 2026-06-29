@@ -1,0 +1,28 @@
+# ====== Shared config (applied to all services) ======
+# Spring cloud config serves this 'application.yml' to every service in addition to their
+# service-specific-file (eg: arder-service.yml). Put cross-cutting defaults here.
+
+eureka:
+  client:
+    service-url:
+      defaultZone: ${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:http://localhost:8761/eureka}
+    instance:
+      prefer-ip-address: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info
+  endpoint:
+    health:
+      show-details: always
+
+
+# Shared JWT secret (HS256). Auth-Service signs with it; gateway/services validate with it.
+# In production use RSA keys (JWKS) instead of a shared secret.
+security:
+  jwt:
+    secret: "Z2pXc2VjdXJlLWVjb21tZXJjZS1qd3Qtc2lnbmluZy1rZXktMjU2LWJpdHMtbG9uZyE="
+    expiration-ms: 900000             # access token: 15 minutes (short-live)
+    refresh-expiration-ms: 604800000  # refresh token: 7 days (long-live)
